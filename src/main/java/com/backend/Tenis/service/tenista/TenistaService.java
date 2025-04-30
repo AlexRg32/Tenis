@@ -10,6 +10,11 @@ import java.util.List;
 public class TenistaService implements ITenistaService {
     private  ITenistaRepository tenistaRepository;
 
+    public TenistaService(ITenistaRepository tenistaRepository) {
+        this.tenistaRepository = tenistaRepository;
+    }
+
+
     @Override
     public List<Tenista> findAll() {
         return (List<Tenista>) tenistaRepository.findAll();

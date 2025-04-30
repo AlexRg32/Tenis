@@ -8,6 +8,10 @@ import java.util.List;
 public class SponsorService implements ISponsorService{
 
     private ISponsorRepository sponsorRepository;
+
+    public SponsorService(ISponsorRepository sponsorRepository) {
+        this.sponsorRepository = sponsorRepository;
+    }
     @Override
     public List<Sponsor> findAll() {
         return (List<Sponsor>) sponsorRepository.findAll();

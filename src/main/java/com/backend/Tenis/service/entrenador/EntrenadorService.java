@@ -10,6 +10,10 @@ import java.util.List;
 public class EntrenadorService implements IEntrenadorService{
 
     private IEntrenadorRepository entrenadorRepository;
+
+    public EntrenadorService(IEntrenadorRepository entrenadorRepository) {
+        this.entrenadorRepository = entrenadorRepository;
+    }
     @Override
     public List<Entrenador> findAll() {
         return (List<Entrenador>) entrenadorRepository.findAll();

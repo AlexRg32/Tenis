@@ -9,6 +9,10 @@ import java.util.List;
 @Service
 public class RaquetaService implements IRaquetaService{
     private IRaquetaRepository raquetaRepository;
+
+    public RaquetaService(IRaquetaRepository raquetaRepository) {
+        this.raquetaRepository = raquetaRepository;
+    }
     @Override
     public List<Raqueta> findAll() {
         return (List<Raqueta>) raquetaRepository.findAll();

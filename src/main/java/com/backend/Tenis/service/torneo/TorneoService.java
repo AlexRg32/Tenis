@@ -11,6 +11,10 @@ public class TorneoService implements ITorneoService{
 
     private  ITorneoRepository torneoRepository;
 
+    public TorneoService(ITorneoRepository torneoRepository) {
+        this.torneoRepository = torneoRepository;
+    }
+
     @Override
     public List<Torneo> findAll() {
         return (List<Torneo>) torneoRepository.findAll();
