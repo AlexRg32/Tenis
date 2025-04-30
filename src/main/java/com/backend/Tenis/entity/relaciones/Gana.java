@@ -37,8 +37,12 @@ public class Gana {
 
 
 
-
+    @Embeddable
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
     class GanaId implements Serializable {
-    private Long torneoId;
-    private Long tenistaId;
+    private long torneoId;
+    private long tenistaId;
 }

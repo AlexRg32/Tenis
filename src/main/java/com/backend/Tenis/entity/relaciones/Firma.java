@@ -46,9 +46,8 @@ public class Firma {
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 @Embeddable
 class FirmaId implements Serializable {
-    private Long sponsorId;
-    private Long tenistaId;
+    private long sponsorId;
+    private long tenistaId;
 }
