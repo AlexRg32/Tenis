@@ -21,12 +21,14 @@ public class Gana {
     private GanaId id;
 
     @ManyToOne
+    @MapsId("torneoId")
     @JoinColumn(referencedColumnName = "id", name = "torneo_id", nullable = false)
-    private Torneo torneo_id;
+    private Torneo torneo;
 
     @ManyToOne
+    @MapsId("tenistaId")
     @JoinColumn(referencedColumnName = "id", name = "tenista_id", nullable = false)
-    private Tenista tenista_id;
+    private Tenista tenista;
 
     @Column(nullable = false)
     @NotNull(message = "El atributo no puede estar vacío")

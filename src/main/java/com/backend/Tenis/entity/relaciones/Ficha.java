@@ -23,10 +23,12 @@ public class Ficha {
     private FichaId id;
 
     @ManyToOne
+    @MapsId("tenistaId")
     @JoinColumn( referencedColumnName = "id", name = "tenista_id", nullable = false)
     private Tenista tenista;
 
     @ManyToOne
+    @MapsId("entrenadorId")
     @JoinColumn( referencedColumnName = "id", name = "entrenador_id", nullable = false)
     private Entrenador entrenador;
 

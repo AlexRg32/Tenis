@@ -1,4 +1,4 @@
-package com.backend.Tenis.view;
+package com.backend.Tenis;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

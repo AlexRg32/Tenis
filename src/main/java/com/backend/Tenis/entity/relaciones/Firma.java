@@ -32,12 +32,12 @@ public class Firma {
     private LocalDate fechaFin;
 
     @ManyToOne
-    @MapsId("sponsorId") // Relación con Sponsor
+    @MapsId("sponsorId")
     @JoinColumn(name = "sponsor_id", nullable = false)
     private Sponsor sponsor;
 
     @ManyToOne
-    @MapsId("tenistaId") // Relación con Tenista
+    @MapsId("tenistaId")
     @JoinColumn(name = "tenista_id", nullable = false)
     private Tenista tenista;
 }
