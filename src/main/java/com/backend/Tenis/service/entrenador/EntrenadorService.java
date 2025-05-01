@@ -1,6 +1,8 @@
 package com.backend.Tenis.service.entrenador;
 
 import com.backend.Tenis.entity.Entrenador;
+import com.backend.Tenis.exception.DeleteEntityException;
+import com.backend.Tenis.exception.NotFoundEntityException;
 import com.backend.Tenis.repository.entrenador.IEntrenadorRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,22 +18,36 @@ public class EntrenadorService implements IEntrenadorService{
     }
     @Override
     public List<Entrenador> findAll() {
-        return (List<Entrenador>) entrenadorRepository.findAll();
+        try{
+             return (List<Entrenador>) entrenadorRepository.findAll();
+        }catch (Exception e){
+            throw new NotFoundEntityException(null, Entrenador.class);
+        }
+
     }
 
     @Override
     public Entrenador findById(Long id) {
-        return entrenadorRepository.findById(id).orElse(null);
+        return entrenadorRepository.findById(id).orElseThrow(() ->new NotFoundEntityException(id, Entrenador.class));
     }
 
     @Override
     public Entrenador save(Entrenador entrenador) {
-        return entrenadorRepository.save(entrenador);
+        try {
+            return entrenadorRepository.save(entrenador);
+        } catch (Exception e){
+            throw new NotFoundEntityException(null, Entrenador.class);
+        }
     }
 
     @Override
     public void deleteById(Long id) {
-        entrenadorRepository.deleteById(id);
+        try {
+            entrenadorRepository.deleteById(id);
+        }catch (Exception e){
+            throw new DeleteEntityException(id, Entrenador.class, e);
+
+        }
     }
 
     @Override

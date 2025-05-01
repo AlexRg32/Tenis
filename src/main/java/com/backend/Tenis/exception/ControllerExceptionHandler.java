@@ -21,14 +21,57 @@ public class ControllerExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Response> handleValidationArgumentsErrors(MethodArgumentNotValidException ex){
-        Map<String, String > errors = new HashMap<>();
+        Map<String, String> errors = new HashMap<>();
 
         ex.getBindingResult().getAllErrors().forEach(error -> {
             String fieldname = ((FieldError)error).getField();
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldname, errorMessage);
-
         });
         return new ResponseEntity<Response>(Response.validationError(errors), HttpStatus.BAD_REQUEST);
+    }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(CreateEntityException.class)
+    public ResponseEntity<Response> handleCreateEntityException(CreateEntityException ex) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put("error", ex.getMessage());
+        return new ResponseEntity<Response>(
+                Response.generalError(errors),
+                HttpStatus.INTERNAL_SERVER_ERROR
+        );
+    }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(UpdateEntityException.class)
+    public ResponseEntity<Response> handleUpdateEntityException(UpdateEntityException ex) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put("error", ex.getMessage());
+        return new ResponseEntity<Response>(
+                Response.generalError(errors),
+                HttpStatus.INTERNAL_SERVER_ERROR
+        );
+    }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(DeleteEntityException.class)
+    public ResponseEntity<Response> handleDeleteEntityException(DeleteEntityException ex) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put("error", ex.getMessage());
+        return new ResponseEntity<Response>(
+                Response.generalError(errors),
+                HttpStatus.INTERNAL_SERVER_ERROR
+        );
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundEntityException.class)
+    public ResponseEntity<Response> handleNotFoundEntityException(NotFoundEntityException ex) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put("error", ex.getMessage());
+        return new ResponseEntity<Response>(
+                Response.notFoundError(errors),
+                HttpStatus.NOT_FOUND
+        );
     }
 }

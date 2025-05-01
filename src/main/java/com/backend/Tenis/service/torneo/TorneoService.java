@@ -1,6 +1,9 @@
 package com.backend.Tenis.service.torneo;
 
+import com.backend.Tenis.entity.Raqueta;
 import com.backend.Tenis.entity.Torneo;
+import com.backend.Tenis.exception.DeleteEntityException;
+import com.backend.Tenis.exception.NotFoundEntityException;
 import com.backend.Tenis.repository.torneo.ITorneoRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,26 +20,44 @@ public class TorneoService implements ITorneoService{
 
     @Override
     public List<Torneo> findAll() {
-        return (List<Torneo>) torneoRepository.findAll();
+        try{
+            return (List<Torneo>) torneoRepository.findAll();
+        }catch (Exception e){
+            throw new NotFoundEntityException(null, Torneo.class);
+        }
+
     }
 
     @Override
     public Torneo findById(Long id) {
-        return torneoRepository.findById(id).orElse(null);
+        return torneoRepository.findById(id).orElseThrow(() -> new NotFoundEntityException(id, Torneo.class));
     }
 
     @Override
     public Torneo save(Torneo torneo) {
-        return torneoRepository.save(torneo);
+       try {
+           return torneoRepository.save(torneo);
+       }
+       catch (Exception e){
+           throw new NotFoundEntityException(null, Torneo.class);
+       }
     }
 
     @Override
     public void deleteById(Long id) {
-        torneoRepository.deleteById(id);
+        try {
+            torneoRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new DeleteEntityException(id, Torneo.class, e);
+        }
     }
 
     @Override
     public Torneo update(Torneo torneo) {
-        return torneoRepository.save(torneo);
+        try {
+            return torneoRepository.save(torneo);
+        } catch (Exception e) {
+            throw new NotFoundEntityException(null, Torneo.class);
+        }
     }
 }
