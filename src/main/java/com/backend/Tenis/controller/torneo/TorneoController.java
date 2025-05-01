@@ -5,6 +5,7 @@ import com.backend.Tenis.dto.torneo.ResponseTorneoDTO;
 import com.backend.Tenis.entity.Torneo;
 import com.backend.Tenis.mapper.torneo.TorneoMapper;
 import com.backend.Tenis.service.torneo.TorneoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,14 +34,14 @@ public class TorneoController {
     }
 
     @GetMapping("/torneo/{id}")
-    public ResponseEntity<ResponseTorneoDTO> findById(@PathVariable Long id) {
+    public ResponseEntity<ResponseTorneoDTO> findById(@Valid  @PathVariable Long id) {
         Torneo torneo = torneoService.findById(id);
         ResponseTorneoDTO responseTorneoDTO = torneoMapper.toResponseTorneoDTO(torneo);
         return ResponseEntity.ok(responseTorneoDTO);
     }
 
     @PostMapping("/torneo")
-    public ResponseEntity<RequestTorneoDTO> save(@RequestBody RequestTorneoDTO requestTorneoDTO) {
+    public ResponseEntity<RequestTorneoDTO> save(@Valid @RequestBody RequestTorneoDTO requestTorneoDTO) {
         Torneo torneo = torneoMapper.toTorneoFromRequest(requestTorneoDTO);
         Torneo savedTorneo = torneoService.save(torneo);
         RequestTorneoDTO savedDTO = torneoMapper.toRequestTorneoDTO(savedTorneo);
@@ -53,7 +54,7 @@ public class TorneoController {
     }
 
     @PutMapping("/torneo")
-    public ResponseEntity<ResponseTorneoDTO> update(@RequestBody ResponseTorneoDTO responseTorneoDTO) {
+    public ResponseEntity<ResponseTorneoDTO> update(@Valid @RequestBody ResponseTorneoDTO responseTorneoDTO) {
         Torneo torneo = torneoMapper.toTorneoFromResponse(responseTorneoDTO);
         Torneo updatedTorneo = torneoService.update(torneo);
         ResponseTorneoDTO updatedDTO = torneoMapper.toResponseTorneoDTO(updatedTorneo);

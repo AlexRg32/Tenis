@@ -5,6 +5,7 @@ import com.backend.Tenis.dto.raqueta.ResponseRaquetaDTO;
 import com.backend.Tenis.entity.Raqueta;
 import com.backend.Tenis.mapper.raqueta.RaquetaMapper;
 import com.backend.Tenis.service.raqueta.IRaquetaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,14 +35,14 @@ public class RaquetaController {
     }
 
     @GetMapping("/raqueta/{id}")
-    public ResponseEntity<ResponseRaquetaDTO> findById(@PathVariable Long id) {
+    public ResponseEntity<ResponseRaquetaDTO> findById(@Valid @PathVariable Long id) {
         Raqueta raqueta = raquetaService.findById(id);
         ResponseRaquetaDTO raquetaDTO = raquetaMapper.toResponseRaquetaDTO(raqueta);
         return ResponseEntity.ok(raquetaDTO);
     }
 
     @PostMapping("/raqueta")
-    public ResponseEntity<RequestRaquetaDTO> save(@RequestBody Raqueta raqueta) {
+    public ResponseEntity<RequestRaquetaDTO> save(@Valid @RequestBody Raqueta raqueta) {
         Raqueta raquetaSave = raquetaService.save(raqueta);
         RequestRaquetaDTO raquetaDTO = raquetaMapper.toRequestRaquetaDTO(raquetaSave);
         return ResponseEntity.ok(raquetaDTO);
@@ -54,7 +55,7 @@ public class RaquetaController {
     }
 
     @PutMapping("/raqueta")
-    public ResponseEntity<ResponseRaquetaDTO> update(@RequestBody Raqueta raqueta) {
+    public ResponseEntity<ResponseRaquetaDTO> update(@Valid @RequestBody Raqueta raqueta) {
         Raqueta raquetaUpdate = raquetaService.update(raqueta);
         ResponseRaquetaDTO raquetaDTO = raquetaMapper.toResponseRaquetaDTO(raquetaUpdate);
         return ResponseEntity.ok(raquetaDTO);
