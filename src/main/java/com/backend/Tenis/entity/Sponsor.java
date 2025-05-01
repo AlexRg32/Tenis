@@ -22,5 +22,9 @@ public class Sponsor {
     @Size(min = 1, max = 50)
     private String nombre;
 
+    @Column
+    @Size( min = 1, max = 50)
+    private String pais;
+
 
 }
