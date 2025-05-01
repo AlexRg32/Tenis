@@ -2,9 +2,11 @@ package com.backend.Tenis.service.sponsor;
 
 import com.backend.Tenis.entity.Sponsor;
 import com.backend.Tenis.repository.sponsor.ISponsorRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class SponsorService implements ISponsorService{
 
     private ISponsorRepository sponsorRepository;

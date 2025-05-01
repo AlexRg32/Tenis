@@ -1,38 +1,48 @@
 package com.backend.Tenis.controller.tenista;
 
+import com.backend.Tenis.dto.tenista.RequestTenistaDTO;
+import com.backend.Tenis.dto.tenista.ResponseTenistaDTO;
 import com.backend.Tenis.entity.Tenista;
+import com.backend.Tenis.mapper.tenista.TenistaMapper;
 import com.backend.Tenis.service.tenista.ITenistaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/tenista")
+@RequestMapping("/api")
 @CrossOrigin(origins = "*")
 public class TenistaController {
 
     private ITenistaService tenistaService;
 
+    @Autowired
+    private TenistaMapper tenistaMapper;
+
     public TenistaController(ITenistaService tenistaService) {
         this.tenistaService = tenistaService;
     }
     @GetMapping("/tenista")
-    public ResponseEntity<List<Tenista>> findAll() {
+    public ResponseEntity<List<ResponseTenistaDTO>> findAll() {
         List<Tenista> tenistas = tenistaService.findAll();
-        return ResponseEntity.ok(tenistas);
+        List<ResponseTenistaDTO> tenistasDTO = tenistaMapper.toResponseTenistaDTOList(tenistas);
+        return ResponseEntity.ok(tenistasDTO);
     }
 
     @GetMapping("/tenista/{id}")
-    public ResponseEntity<Tenista> findById(@PathVariable Long id) {
+    public ResponseEntity<ResponseTenistaDTO> findById(@PathVariable Long id) {
         Tenista tenista = tenistaService.findById(id);
-        return ResponseEntity.ok(tenista);
+        ResponseTenistaDTO tenistaDTO = tenistaMapper.toResponseTenistaDTO(tenista);
+        return ResponseEntity.ok(tenistaDTO);
     }
 
     @PostMapping("/tenista")
-    public ResponseEntity<Tenista> save(@RequestBody Tenista tenista) {
+    public ResponseEntity<RequestTenistaDTO> save(@RequestBody Tenista tenista) {
         Tenista tenistaSave = tenistaService.save(tenista);
-        return ResponseEntity.ok(tenistaSave);
+        RequestTenistaDTO tenistaDTO = tenistaMapper.toRequestTenistaDTO(tenistaSave);
+        return ResponseEntity.ok(tenistaDTO);
     }
 
     @DeleteMapping("/tenista/{id}")
@@ -41,9 +51,10 @@ public class TenistaController {
     }
 
     @PutMapping("/tenista")
-    public ResponseEntity<Tenista> update(@RequestBody Tenista tenista) {
+    public ResponseEntity<ResponseTenistaDTO> update(@RequestBody Tenista tenista) {
         Tenista tenistaUpdate = tenistaService.update(tenista);
-        return ResponseEntity.ok(tenistaUpdate);
+        ResponseTenistaDTO tenistaDTO = tenistaMapper.toResponseTenistaDTO(tenistaUpdate);
+        return ResponseEntity.ok(tenistaDTO);
     }
 
 

@@ -15,7 +15,7 @@ public class Entrenador {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column
     @Size(min = 3, max = 50)
