@@ -25,4 +25,12 @@ public class Entrenador {
     @Email
     @Size(min = 3, max = 50)
     private String email;
+
+    @Column
+    private boolean activo;
+
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "id", name = "academia_id")
+    private Academia academia;
+
 }

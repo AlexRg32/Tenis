@@ -128,3 +128,5 @@ INSERT INTO gana (torneo_id, tenista_id, fecha)
 VALUES (1, 1, '2023-06-11'),
        (2, 2, '2023-07-15'),
        (3, 3, '2023-09-10');
+
+

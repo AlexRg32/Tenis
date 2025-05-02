@@ -11,4 +11,5 @@ public class ResponseEntrenadorDTO {
     private Long id;
     private String nombre;
     private String email;
+    private boolean activo;
 }
