@@ -1,9 +1,14 @@
 package com.backend.Tenis.entity;
 
+import com.backend.Tenis.entity.relaciones.Ficha;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -11,6 +16,7 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table (name = "entrenador")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "nombre")
 public class Entrenador {
 
     @Id
@@ -32,5 +38,8 @@ public class Entrenador {
     @ManyToOne
     @JoinColumn(referencedColumnName = "id", name = "academia_id")
     private Academia academia;
+
+    @OneToMany(mappedBy = "entrenador")
+    private List<Ficha> fichas;
 
 }

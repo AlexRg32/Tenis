@@ -47,6 +47,9 @@ public class Tenista {
             , inverseJoinColumns = @JoinColumn(name = "raqueta_id"))
     private List<Raqueta> raquetas;
 
+    @OneToMany(mappedBy = "tenista")
+    private List<Ficha> entrenadores;
+
 
 
 
