@@ -39,11 +39,10 @@ public class Tenista {
     @OneToMany(mappedBy = "tenista")
     private List<Gana> torneos;
 
-    public List<Torneo> getTorneos() {
-        return torneos.stream()
-                .map(Gana::getTorneo)
-                .collect(Collectors.toList());
-    }
+    @OneToMany(mappedBy = "tenista")
+    private List<Ficha> sponsors;
+
+
 
 
 

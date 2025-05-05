@@ -1,5 +1,9 @@
 package com.backend.Tenis.entity;
 
+import com.backend.Tenis.entity.relaciones.Ficha;
+import com.backend.Tenis.entity.relaciones.Firma;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -12,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "sponsor")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "nombre")
 public class Sponsor {
 
     @Id
@@ -25,6 +30,9 @@ public class Sponsor {
     @Column
     @Size( min = 1, max = 50)
     private String pais;
+
+    @OneToMany(mappedBy = "sponsor")
+    private List<Firma> tenistas;
 
 
 }
