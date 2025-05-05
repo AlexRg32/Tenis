@@ -1,0 +1,5 @@
+<entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm" version="2.2">
+    <named-query name="Tenista.obtenerEntrenadoresActivos">
+        <query></query>
+    </named-query>
+</entity-mappings>

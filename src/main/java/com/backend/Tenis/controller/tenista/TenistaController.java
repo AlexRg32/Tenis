@@ -3,6 +3,7 @@ package com.backend.Tenis.controller.tenista;
 import com.backend.Tenis.dto.tenista.RequestTenistaDTO;
 import com.backend.Tenis.dto.tenista.ResponseTenistaDTO;
 import com.backend.Tenis.entity.Tenista;
+import com.backend.Tenis.entity.Torneo;
 import com.backend.Tenis.mapper.tenista.TenistaMapper;
 import com.backend.Tenis.service.tenista.ITenistaService;
 import jakarta.validation.Valid;
@@ -56,6 +57,20 @@ public class TenistaController {
         Tenista tenistaUpdate = tenistaService.update(tenista);
         ResponseTenistaDTO tenistaDTO = tenistaMapper.toResponseTenistaDTO(tenistaUpdate);
         return ResponseEntity.ok(tenistaDTO);
+    }
+
+    //obtener puntos del tenista
+    @GetMapping("/tenista/puntos/{id}")
+    public ResponseEntity<Integer> puntosTenista(@PathVariable Long id) {
+        Integer puntos = tenistaService.obtenerPuntosTenista(id);
+        return ResponseEntity.ok(puntos);
+    }
+
+    //obtener torneos ganados del tenista
+    @GetMapping("/tenista/torneos/{id}")
+    public ResponseEntity<List<Torneo>> torneosTenista(@PathVariable Long id) {
+        List<Torneo> torneos = tenistaService.torneoGanadosPorTenista(id);
+        return ResponseEntity.ok(torneos);
     }
 
 
