@@ -1,5 +1,7 @@
 package com.backend.Tenis.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import lombok.AllArgsConstructor;
@@ -15,7 +17,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "nombre")
 public class Academia {
 
     @Id
@@ -33,6 +35,9 @@ public class Academia {
     @Column
     @Max(value = 50)
     private String pais;
+
+    @OneToMany(mappedBy = "academia")
+    private List<Entrenador> entrenadores;
 
 
 }

@@ -40,6 +40,6 @@ public class Entrenador {
     private Academia academia;
 
     @OneToMany(mappedBy = "entrenador")
-    private List<Ficha> fichas;
+    private List<Ficha> entrenadores;
 
 }
