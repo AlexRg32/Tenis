@@ -2,6 +2,7 @@ package com.backend.Tenis.entity.relaciones;
 
 import com.backend.Tenis.entity.Tenista;
 import com.backend.Tenis.entity.Torneo;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -23,10 +24,12 @@ public class Gana {
     @ManyToOne
     @MapsId("torneoId")
     @JoinColumn(referencedColumnName = "id", name = "torneo_id", nullable = false)
+
     private Torneo torneo;
 
     @ManyToOne
     @MapsId("tenistaId")
+
     @JoinColumn(referencedColumnName = "id", name = "tenista_id", nullable = false)
     private Tenista tenista;
 

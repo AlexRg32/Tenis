@@ -21,17 +21,6 @@ public class TenisApplication {
 		return new ModelMapper();
 	}
 
-	@Bean
-	public OpenAPI customOpenAPI() {
-		return new OpenAPI()
-				.components(new Components())
-				.info(new Info().title("Tenis API")
-						.description("Ejemplo de API REST")
-						.contact(new Contact()
-								.name("Alejandro Ruiz")
-								.email("alexrg32@outlook.es")
-								.url("https://portal.edu.gva.es/iesmaciaabela/l"))
-						.version("1.0"));
-	}
+
 
 }

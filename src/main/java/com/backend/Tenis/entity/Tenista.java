@@ -1,8 +1,14 @@
 package com.backend.Tenis.entity;
 
+import com.backend.Tenis.entity.relaciones.Ficha;
+import com.backend.Tenis.entity.relaciones.Gana;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -10,6 +16,7 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "tenista")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "nombre")
 public class Tenista {
 
     @Id
@@ -27,6 +34,17 @@ public class Tenista {
     @Column
     @Size(min = 1, max = 50)
     private String nacionalidad;
+
+
+    @OneToMany(mappedBy = "tenista")
+    private List<Gana> torneos;
+
+    public List<Torneo> getTorneos() {
+        return torneos.stream()
+                .map(Gana::getTorneo)
+                .collect(Collectors.toList());
+    }
+
 
 
 }

@@ -1,17 +1,25 @@
 package com.backend.Tenis.entity;
 
+import com.backend.Tenis.entity.relaciones.Gana;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "torneo")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "nombre")
 public class Torneo {
 
     @Id
@@ -28,6 +36,19 @@ public class Torneo {
 
     @Column
     private int puntos;
+
+
+
+    @OneToMany(mappedBy = "torneo")
+    private List<Gana> tenistas;
+
+
+    public List<Tenista> getTenistas() {
+        return tenistas.stream()
+                .map(Gana::getTenista)
+                .toList();
+    }
+
 
 
 
