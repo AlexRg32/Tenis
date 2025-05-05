@@ -42,6 +42,11 @@ public class Tenista {
     @OneToMany(mappedBy = "tenista")
     private List<Ficha> sponsors;
 
+    @ManyToMany
+    @JoinTable(name = "compra", joinColumns = @JoinColumn(name = "tenista_id")
+            , inverseJoinColumns = @JoinColumn(name = "raqueta_id"))
+    private List<Raqueta> raquetas;
+
 
 
 
