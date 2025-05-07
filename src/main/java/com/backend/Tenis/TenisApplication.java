@@ -16,10 +16,7 @@ public class TenisApplication {
 		SpringApplication.run(TenisApplication.class, args);
 	}
 
-	@Bean
-	public ModelMapper modelMapper() {
-		return new ModelMapper();
-	}
+
 
 
 

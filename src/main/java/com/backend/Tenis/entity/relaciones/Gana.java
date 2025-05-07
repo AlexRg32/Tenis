@@ -21,15 +21,13 @@ public class Gana {
     @EmbeddedId
     private GanaId id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @MapsId("torneoId")
     @JoinColumn(referencedColumnName = "id", name = "torneo_id", nullable = false)
-
     private Torneo torneo;
 
-    @ManyToOne
+    @ManyToOne( fetch = FetchType.EAGER)
     @MapsId("tenistaId")
-
     @JoinColumn(referencedColumnName = "id", name = "tenista_id", nullable = false)
     private Tenista tenista;
 
@@ -40,12 +38,3 @@ public class Gana {
 
 
 
-    @Embeddable
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    class GanaId implements Serializable {
-    private long torneoId;
-    private long tenistaId;
-}

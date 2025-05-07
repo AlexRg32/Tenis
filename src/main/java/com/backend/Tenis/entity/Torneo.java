@@ -11,6 +11,7 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -39,15 +40,9 @@ public class Torneo {
 
 
 
-    @OneToMany(mappedBy = "torneo")
-    private List<Gana> tenistas;
+    @OneToMany(mappedBy = "torneo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Gana> tenistas = new ArrayList<>();
 
-
-    public List<Tenista> getTenistas() {
-        return tenistas.stream()
-                .map(Gana::getTenista)
-                .toList();
-    }
 
 
 

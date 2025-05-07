@@ -9,6 +9,7 @@ import lombok.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -40,14 +41,12 @@ public class Firma {
     @MapsId("tenistaId")
     @JoinColumn(name = "tenista_id", nullable = false)
     private Tenista tenista;
+
+    public Firma(FirmaId firmaId, double saldo, LocalDateTime fechaInicio, LocalDateTime fechaFin, Sponsor sponsor, Tenista tenista) {
+        this.id = firmaId;
+        this.saldo = BigDecimal.valueOf(saldo);
+        this.fechaInicio = fechaInicio.toLocalDate();
+        this.fechaFin = fechaFin.toLocalDate();
+    }
 }
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Embeddable
-class FirmaId implements Serializable {
-    private long sponsorId;
-    private long tenistaId;
-}

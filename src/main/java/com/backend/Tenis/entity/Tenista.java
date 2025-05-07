@@ -1,12 +1,14 @@
 package com.backend.Tenis.entity;
 
 import com.backend.Tenis.entity.relaciones.Ficha;
+import com.backend.Tenis.entity.relaciones.Firma;
 import com.backend.Tenis.entity.relaciones.Gana;
 import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,10 +39,11 @@ public class Tenista {
 
 
     @OneToMany(mappedBy = "tenista")
-    private List<Gana> torneos;
+    private List<Gana> torneos = new ArrayList<>();
+
 
     @OneToMany(mappedBy = "tenista")
-    private List<Ficha> sponsors;
+    private List<Firma> sponsors;
 
     @ManyToMany
     @JoinTable(name = "compra", joinColumns = @JoinColumn(name = "tenista_id")

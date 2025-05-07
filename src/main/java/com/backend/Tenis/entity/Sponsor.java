@@ -31,7 +31,7 @@ public class Sponsor {
     @Size( min = 1, max = 50)
     private String pais;
 
-    @OneToMany(mappedBy = "sponsor")
+    @OneToMany(mappedBy = "sponsor", cascade = CascadeType.ALL)
     private List<Firma> tenistas;
 
 

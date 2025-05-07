@@ -37,15 +37,3 @@ public class Ficha {
 
 
 }
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Embeddable
-class FichaId implements Serializable {
-
-    @Column( name = "tenista_id")
-    private long tenistaId;
-    @Column( name = "entrenador_id")
-    private long entrenadorId;
-}

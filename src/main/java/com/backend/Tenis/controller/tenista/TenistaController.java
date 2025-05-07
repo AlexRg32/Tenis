@@ -1,9 +1,10 @@
 package com.backend.Tenis.controller.tenista;
 
+import com.backend.Tenis.dto.sponsor.AñadirSponsorDTO;
+import com.backend.Tenis.dto.torneo.AñadirTorneoDTO;
 import com.backend.Tenis.dto.tenista.RequestTenistaDTO;
 import com.backend.Tenis.dto.tenista.ResponseTenistaDTO;
 import com.backend.Tenis.entity.Tenista;
-import com.backend.Tenis.entity.Torneo;
 import com.backend.Tenis.mapper.tenista.TenistaMapper;
 import com.backend.Tenis.service.tenista.ITenistaService;
 import jakarta.validation.Valid;
@@ -59,19 +60,39 @@ public class TenistaController {
         return ResponseEntity.ok(tenistaDTO);
     }
 
-    //obtener puntos del tenista
-    @GetMapping("/tenista/puntos/{id}")
-    public ResponseEntity<Integer> puntosTenista(@PathVariable Long id) {
-        Integer puntos = tenistaService.obtenerPuntosTenista(id);
-        return ResponseEntity.ok(puntos);
+    @PostMapping("/tenista/añadirSponsor")
+    public ResponseEntity<ResponseTenistaDTO> addSponsor(@Valid @RequestBody AñadirSponsorDTO añadirSponsorDTO) {
+        Tenista tenista = tenistaService.agregarSponsor(añadirSponsorDTO);
+        ResponseTenistaDTO tenistaDTO = tenistaMapper.toResponseTenistaDTO(tenista);
+        return ResponseEntity.ok(tenistaDTO);
     }
 
-    //obtener torneos ganados del tenista
-    @GetMapping("/tenista/torneos/{id}")
-    public ResponseEntity<List<Torneo>> torneosTenista(@PathVariable Long id) {
-        List<Torneo> torneos = tenistaService.torneoGanadosPorTenista(id);
-        return ResponseEntity.ok(torneos);
+    @PostMapping("/tenista/añadirTorneo")
+    public ResponseEntity<ResponseTenistaDTO> addTorneo(@Valid @RequestBody AñadirTorneoDTO torneoDTO) {
+        System.out.println("ID TENISTA: " + torneoDTO.getTenistaId());
+        Tenista tenista = tenistaService.ganarTorneo(torneoDTO);
+        System.out.println("ID TENISTA: " + tenista.getId());
+        ResponseTenistaDTO tenistaDTO = tenistaMapper.toResponseTenistaDTO(tenista);
+        return ResponseEntity.ok(tenistaDTO);
+
     }
+
+    @DeleteMapping("/tenista/borrarTenista/{id}")
+    public ResponseEntity<Void> borrarTenista(@Valid @PathVariable Long id) {
+      tenistaService.borrarTenista(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/tenista/ficharEntrenador/{idTenista}/{idEntrenador}")
+    public ResponseEntity<ResponseTenistaDTO> ficharEntrenador(@PathVariable Long idTenista, @PathVariable Long idEntrenador) {
+        Tenista tenista = tenistaService.ficharEntrenador(idTenista, idEntrenador);
+        ResponseTenistaDTO tenistaDTO = tenistaMapper.toResponseTenistaDTO(tenista);
+        return ResponseEntity.ok(tenistaDTO);
+    }
+
+
+
+
 
 
 }

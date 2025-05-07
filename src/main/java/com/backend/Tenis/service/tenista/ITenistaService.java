@@ -1,7 +1,8 @@
 package com.backend.Tenis.service.tenista;
 
+import com.backend.Tenis.dto.sponsor.AñadirSponsorDTO;
+import com.backend.Tenis.dto.torneo.AñadirTorneoDTO;
 import com.backend.Tenis.entity.Tenista;
-import com.backend.Tenis.entity.Torneo;
 
 import java.util.List;
 
@@ -11,6 +12,8 @@ public interface ITenistaService {
     Tenista save(Tenista tenista);
     void deleteById(Long id);
     Tenista update(Tenista tenista);
-    int obtenerPuntosTenista(Long id);
-    List<Torneo>torneoGanadosPorTenista(Long id);
+  Tenista agregarSponsor(AñadirSponsorDTO sponsorDTO);
+  Tenista ganarTorneo(AñadirTorneoDTO añadirTorneoDTO);
+    void  borrarTenista(Long id);
+    Tenista ficharEntrenador(Long idTenista, Long idEntrenador);
 }
